@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/adamki/snake-time.png?label=ready&title=Ready)](https://waffle.io/adamki/snake-time)
 # Game Time Starter Kit
 
 To install the dependencies:
