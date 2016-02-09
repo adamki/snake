@@ -1,31 +1,32 @@
-# Game Time Starter Kit
+[![Throughput Graph](https://graphs.waffle.io/adamki/snake-time/throughput.svg)](https://waffle.io/adamki/snake-time/metrics)
+[![Stories in Ready](https://badge.waffle.io/adamki/snake-time.svg?label=ready&title=Ready)](http://waffle.io/adamki/snake-time)
 
-To install the dependencies:
+###Snake-Time
+This is a Paired Project for module 4 students at the Turing School of Software and Design. 
 
-```
-npm install
-```
+#####Project collaborators:
+[Matt Rooney](https://github.com/mattrooney)
+[Adam Ki Jensen](https://github.com/adamki)
 
-To fire up a development server:
+##### About
+This is a Javascript game based on the retro game, Snake! To run this game locally, simply:
 
-```
-npm start
-```
+Clone this repo:
 
-Once the server is running, you can visit:
+`git clone git@github.com:adamki/snake-time.git`
 
-* `http://localhost:8080/webpack-dev-server/` to run your application.
-* `http://localhost:8080/webpack-dev-server/test.html` to run your test suite in the browser.
+Install dependencies
 
-To build the static files:
+`npm install`
 
-```js
-npm run build
-```
+Start the Server:
+
+'npm start'
+
+Visit in Browser: 
+
+`http://localhost:8080`
 
 
-To run tests in Node:
 
-```js
-npm test
-```
+
