@@ -1,8 +1,6 @@
 var assert = require('chai').assert
 var expect = require('chai').expect
-
 var Snake = require('../lib/snake');
-
 const sinon = require('sinon/pkg/sinon');
 
 describe('snake', function() {
@@ -49,17 +47,12 @@ describe('draw()', function() {
   it('should draw itself on the canvas', function(){
     var canvas = { fillRect: function(){} };
     var spy = sinon.spy(canvas, "fillRect");
-
     var options = {canvas: canvas}
-
     var snake = new Snake(options);
 
     snake.draw()
 
     assert(spy.calledOnce, 'fillRect method was called on canvas context')
-    assert(spy.calledWith(0, 0, 10, 20), 'fillRect method was called with unexpected args')
+    assert(spy.calledWith(50, 50, 10, 10), 'fillRect method was called with unexpected args')
   });
 });
-// describe('snake', function()  {
-//   it('exists')
-// })
