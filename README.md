@@ -5,11 +5,15 @@
 This is a Paired Project for module 4 students at the Turing School of Software and Design. 
 
 #####Project collaborators:
-[Matt Rooney](https://github.com/mattrooney)
+[Matt Rooney](https://github.com/mattrooney) |
 [Adam Ki Jensen](https://github.com/adamki)
 
 ##### About
-This is a Javascript game based on the retro game, Snake! To run this game locally, simply:
+
+See the original Project spec [here](https://github.com/turingschool/lesson_plans/blob/master/ruby_04-apis_and_scalability/gametime_project.markdown)
+This is a Javascript game based on the retro game, Snake! It uses an HTML5 `<canvas>` element and Javascript.
+
+#####To run this game locally, simply:
 
 Clone this repo:
 
@@ -21,12 +25,10 @@ Install dependencies
 
 Start the Server:
 
-'npm start'
+`npm start`
 
 Visit in Browser: 
 
 `http://localhost:8080`
-
-
 
 
