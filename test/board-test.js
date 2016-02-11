@@ -5,7 +5,9 @@ var Board  = require('../lib/board');
 
 describe('board', function() {
   it('should be an object', function() {
-    const board = new Board({});
+    var canvas = {fillRect: function(){}};
+    var options = {canvas: canvas};
+    const board = new Board(options);
     assert.typeOf(board, 'object');
   });
 
