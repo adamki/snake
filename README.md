@@ -13,6 +13,8 @@ This is a Paired Project for module 4 students at the Turing School of Software 
 See the original Project spec [here](https://github.com/turingschool/lesson_plans/blob/master/ruby_04-apis_and_scalability/gametime_project.markdown)
 This is a Javascript game based on the retro game, Snake! It uses an HTML5 `<canvas>` element and Javascript.
 
+What makes this game of snake better? It's got PORTALS!
+
 #####To run this game locally, simply:
 
 Clone this repo:
