@@ -1,7 +1,14 @@
+const $ = require('jquery');
+'use strict'
 require('./snake-test')
 require('./board-test')
+require('./food-test')
 
-var canvas = document.getElementById('game');
-var context = canvas.getContext('2d');
+const canvas = document.createElement("canvas");
+const ctx = canvas.getContext('2d');
 
-context.fillRect(50, 50, 10, 10);
+function animate() {
+    requestAnimationFrame(animate);
+  }
+
+  animate();
