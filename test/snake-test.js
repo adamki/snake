@@ -51,6 +51,13 @@ describe('snake', function() {
     assert.equal(snake.x, 20)
   })
 
+  it('can add a node', function() {
+    const snake = new Snake(options)
+    assert.equal(snake.nodes.length, 0)
+    snake.addNode;
+    assert.equal(snake.nodes.length, 5)
+  })
+
   it('can collide with itself', function() {
     const snake = new Snake(options)
     snake.nodes = [[10, 20], [10, 30], [10, 40], [10, 50]]
@@ -58,7 +65,24 @@ describe('snake', function() {
     snake.y = 50;
     assert.equal(snake.collidesWithSelf, true)
    })
-})
+
+   it.skip('can detect walls', function() {
+     const snake = new Snake(options)
+     snake.direction = "left";
+     snake.move;
+
+     assert(snake.wallDetection);
+   })
+
+   it.skip('can enter and exit a portal', function() {
+     let portal_entry  = new Portal(options);
+     let portal_exit   = new Portal(options);
+     let portalSet     = {entry: portal_entry, exit: portal_exit}
+     const snake = new Snake(options)
+      snake.move;
+      snake.entersPortal(portalSet);
+   })
+});
 
 describe('draw()', function() {
   it.skip('should draw itself on the canvas', function(){

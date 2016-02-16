@@ -24,7 +24,7 @@ describe('food', function() {
     assert.notEqual(food_one.y, food_two.y);
   })
 
-  it('can be eaten and re-drawn at new location', function() {
+  it('can be eaten and replaced at new location', function() {
     const board = new Board(options);
     let food = new Food(options);
     let location = [food.x, food.y]
