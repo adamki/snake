@@ -32,4 +32,58 @@ describe('board', function() {
     const board  = new Board(options);
     assert.typeOf(board.snake, 'object');
   });
+
+  it('should have food', function () {
+    var canvas = {fillRect: function(){}};
+    var options = {canvas: canvas};
+    const board  = new Board(options);
+    assert.typeOf(board.food, 'object');
+  });
+
+  it('should have a score', function() {
+    var canvas = {fillRect: function(){}};
+    var options = {canvas: canvas};
+    const board  = new Board(options);
+    assert.equal(board.score, 0);
+  });
+
+  it('should have a level', function() {
+    var canvas = {fillRect: function(){}};
+    var options = {canvas: canvas};
+    const board  = new Board(options);
+    assert.equal(board.level, 1);
+  });
+
+  it('can add points', function() {
+    var canvas = {fillRect: function(){}};
+    var options = {canvas: canvas};
+    const board  = new Board(options);
+    assert.equal(board.score, 0);
+
+    board.addPoints;
+    assert.equal(board.score, 10);
+  });
+
+  it('can increase the level', function() {
+    var canvas = {fillRect: function(){}};
+    var options = {canvas: canvas};
+    const board  = new Board(options);
+    assert.equal(board.score, 0);
+    assert.equal(board.level, 1);
+
+    board.addPoints;
+    board.increaseLevel;
+    assert.equal(board.score, 10);
+    assert.equal(board.level, 1);
+
+    board.addPoints;
+    board.increaseLevel;
+    assert.equal(board.score, 20);
+    assert.equal(board.level, 1);
+
+    board.addPoints;
+    board.increaseLevel;
+    assert.equal(board.score, 30);
+    assert.equal(board.level, 2);
+  })
 });
