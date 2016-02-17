@@ -70,6 +70,12 @@
 	var animationLength = 800000; // Animation length in milliseconds
 
 	$(document).ready(function () {
+	  $('.game').hide();
+	});
+
+	$('.modal-start').on('click', function () {
+	  $('#modal1').hide();
+	  $('.game').show();
 	  keyDownListener();
 	  animate();
 	});
@@ -116,11 +122,11 @@
 	    if (board.modes.portal === true) {
 	      portal_entry.draw("blue");
 	      portal_exit.draw("orange");
+	      snake.entersPortal(portalSet);
 	    }
 	    if (snake.wallDetection === true || snake.collidesWithSelf === true) {
 	      console.log("YOU CANT EAT YOURSELF");
 	    } else {
-	      snake.entersPortal(portalSet);
 	      snakeCollidesWithFood();
 	      requestAnimationFrame(setTimeout(gameLoop, speed));
 	    }
