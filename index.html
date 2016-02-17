@@ -24,7 +24,7 @@
           <p>
             INSTRUCTIONS: Use the arrow keys to move the green snake around the
             screen and eat the red food to score points.
-            The <button class="black-text">Vim</button> button turns on Vim Mode
+            The <button class="black-text">Directions</button> button turns on Vim Mode
             which diasbles the arrow keys and enables Vim directional keys (hjkl).
             The <button class="black-text">Portals</button> button turns on Portal
             Mode which adds portals to the board so you can transcend both time
@@ -61,12 +61,21 @@
       </div>
     </div>
   </div>
-  <div class="row center">
+  <div class="row center game-buttons">
     <button id='vim'>Directions: STD</button>
     <button id='portal'>Portals: Off</button><br><br>
     <button id='speed'>Speed: Slow</button>
     <button id='toggle-walls'>Walls: Off</button><br><br>
 
+  </div>
+
+
+  <div class="game-over white-text center">
+    <h1>GAME OVER</h1>
+    <h5>High Scores:</h5>
+    <ul class="high-scores"></ul>
+    <br>
+    <a href="/" id='new-game' class='btn green white-text'>New Game</a>
   </div>
 
   <!-- <script src="jquery-1.12.0.min.js"></script> -->
