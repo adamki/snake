@@ -13,33 +13,64 @@
 <body>
   <div class="container">
     <h1 id="neon-tubing">~SNKE~</h1>
+    <!-- Modal Structure -->
+  <div id="modal1">
+    <div class="modal-content white-text">
+      <div class="row">
+        <img src="images/cartoon-snake.png" alt="" class="col s2"/>
+        <div class="col s 8">
+          <h4>Welcome to Snke!!!</h4>
+        </div>
+          <p>
+            INSTRUCTIONS: Use the arrow keys to move the green snake around the
+            screen and eat the red food to score points.
+            The <button class="black-text">Vim</button> button turns on Vim Mode
+            which diasbles the arrow keys and enables Vim directional keys (hjkl).
+            The <button class="black-text">Portals</button> button turns on Portal
+            Mode which adds portals to the board so you can transcend both time
+            and space. Guess what the <button class="black-text">Speed</button>
+            does? Increases the speed! Also, the walls are currently set to off
+            so you can pass through them. Click the
+            <button class="black-text">Walls</button> to turn them on if you're
+            the real deal. WATCH OUT - those modes might just go ahead and turn
+            themselves on if you score enough points!
+          </p>
+      </div>
+    </div>
+    <div class="modal-footer center">
+      <a href="#!" class="white-text modal-start modal-close waves-effect waves-green btn green">Start Game</a>
+    </div>
+    <br>
+  </div>
+
     <div class="row">
-      <div class="col s10">
-        <canvas id="canvas" width="600" height="400"></canvas>
+      <div class="game">
+        <div class="col s10">
+          <canvas id="canvas" width="600" height="400"></canvas>
+        </div>
+        <div class="col s2 green-text">
+          <h5>Score</h5>
+          <p id="current-score" class="center">
+            0
+          </p>
+          <h5>Level</h5>
+          <p id="current-level" class="center">
+            1
+          </p>
+        </div>
       </div>
-      <div class="col s2 green-text">
-        <h5>Score</h5>
-        <p id="current-score" class="center">
-          0
-        </p>
-        <h5>Level</h5>
-        <p id="current-level" class="center">
-          1
-        </p>
+
+      <div class="row center">
+        <button id='vim'>Vim</button>
+        <button id='portal'>Portals</button>
+        <button id='speed'>Speed</button>
+        <button id='toggle-walls'>Walls: Off</button>
       </div>
     </div>
-
-    <div class="row center">
-      <button id='vim'>Vim</button>
-      <button id='portal'>Portals: Off</button>
-      <button id='speed'>Speed: Slow</button>
-      <button id='toggle-walls'>Walls: Off</button>
-    </div>
-
 
   </div>
-  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <!-- <script src="jquery-1.12.0.min.js"></script> -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="main.bundle.js"></script>
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
