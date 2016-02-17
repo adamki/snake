@@ -1,0 +1,62 @@
+*{
+  font-family: 'Press Start 2P';
+}
+
+button {
+}
+
+#canvas {
+  margin-left: 5%;
+  margin-right: 25%;
+  border: 1px #00ff00 solid;
+}
+
+body {
+  background-color: black;
+}
+
+@keyframes neonspark  {
+0% { text-shadow: none; }
+30% { text-shadow: 0 0 30px rgba(0, 255, 0,0.6); }
+60% {
+  text-shadow: 0 0 30px rgba(0,255,0,0.6),
+      0 0 60px rgba(0,255,0,0.4);
+  }
+80% { text-shadow: none; }
+100% {
+    text-shadow: 0 0 30px rgba(80,255,0,0.6),
+      0 0 60px rgba(80,255,0, 0.4),
+      0 0 100px rgba(80,255, 0,0.2),
+      0 0 90px rgba(80,255,0,0.1);
+  }
+}
+
+@font-face{
+  font-weight:normal;
+  font-style:normal;
+}
+body { margin: 0; }
+h1#neon-tubing {
+  padding: 6rem;
+  text-align: center;
+  font-family: 'Press Start 2P';
+  font-size: 11rem; letter-spacing: 2rem;
+}
+
+h1#neon-tubing {
+  margin: 0;
+  font-weight: 100;
+  text-align: center;
+  font-family: 'Press Start 2P';
+  color: #111;
+  padding: 4rem;
+  font-size: 6rem;
+  letter-spacing: 2rem;
+  animation: neonspark 1s 3s forwards;
+  text-shadow:
+    0 0 20px rgba(0,255,0,0.6),
+    0 0 40px rgba(0,255,0,0.4),
+    0 0 60px rgba(0,255,0,0.2),
+    0 0 80px rgba(0,255,0,0.1);
+}
+h1#neon-tubing span { animation: neonspark 1s 1s infinite;  }
