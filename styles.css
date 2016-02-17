@@ -8,7 +8,7 @@ button {
 #canvas {
   margin-left: 5%;
   margin-right: 25%;
-  border: 1px #00ff00 solid;
+  border: 1px #00ff00 dotted;
 }
 
 body {
