@@ -50,7 +50,8 @@
 	var Board = __webpack_require__(2);
 	var Snake = __webpack_require__(3);
 	var Food = __webpack_require__(6);
-	var Portal = __webpack_require__(7);
+	var Portal = __webpack_require__(8);
+	var PowerUp = __webpack_require__(7);
 	var canvas = document.getElementById("canvas");
 	var ctx = canvas.getContext('2d');
 	var direction = 'down';
@@ -59,18 +60,21 @@
 	var board = new Board(options);
 	var snake = new Snake(options);
 	var food = new Food(options);
+	var powerup = new PowerUp(options);
 
 	var portal_entry = new Portal(options);
 	var portal_exit = new Portal(options);
 	var portalSet = { entry: portal_entry, exit: portal_exit };
-
-	var speed = 80;
+	var speed = board.modes.speed;
 
 	var startTime = -1;
 	var animationLength = 800000; // Animation length in milliseconds
+	var audio = new Audio('audio/snake.mp3');
 
 	$(document).ready(function () {
+	  audio.play();
 	  $('.game').hide();
+	  $('.game-over').hide();
 	});
 
 	$('.modal-start').on('click', function () {
@@ -80,22 +84,59 @@
 	  animate();
 	});
 
+	function animate() {
+	  requestAnimationFrame(function gameLoop() {
+	    ctx.clearRect(0, 0, canvas.width, canvas.height);
+	    food.draw;
+	    snake.draw;
+	    snake.move;
+	    if (board.modes.portals === true) {
+	      portal_entry.draw("#7DD6F0"); //blue
+	      portal_exit.draw("#FFA500"); //orange
+	      snake.entersPortal(portalSet);
+	    }
+	    if (board.modes.powerup === true) {
+	      powerup.draw;
+	    }
+	    if (snake.wallDetection === true || snake.collidesWithSelf === true) {
+	      saveScore();
+	      gameOver();
+	    } else {
+	      snakeCollidesWithFood();
+	      snakeCollidesWithPowerUp();
+	      requestAnimationFrame(setTimeout(gameLoop, board.modes.speed));
+	    }
+	  });
+	};
+
+	function gameOver() {
+	  $('.game').hide();
+	  $('.game-buttons').hide();
+	  $('.game-over').show();
+	  $('.high-scores').append('<li>' + localStorage.getItem("highscore") + '</li>' + '<li>' + localStorage.getItem("midscore") + '</li>' + '<li>' + localStorage.getItem("lowscore") + '</li>');
+	}
+
 	$("#vim").on('click', function () {
-	  if (board.modes.vim === true) {
-	    keyDownListener();
-	    board.modes.vim = false;
-	  } else {
-	    vimKeyListener();
-	    board.modes.vim = true;
-	  }
+	  board.modes.vim === true ? board.modes.vim = false : board.modes.vim = true;
+	  $(this).toggleClass('red').text(function (i, val) {
+	    return val === 'Directions: STD' ? 'Directions: VIM' : 'Directions: STD';
+	  });
+	  return keyDownListener();
 	});
 
 	$("#portal").on('click', function () {
-	  board.modes.portal = true;
+	  board.modes.portals === true ? board.modes.portals = false : board.modes.portals = true;
+	  $(this).toggleClass('red').text(function (i, val) {
+	    return val === 'Portals: On' ? 'Portals: Off' : 'Portals: On';
+	  });
 	});
 
 	$("#speed").on('click', function () {
-	  speed = 30;
+	  console.log(board.modes.speed);
+	  $(this).toggleClass('red').text(function (i, val) {
+	    return val === 'Speed: Slow' ? 'Speed: Fast' : 'Speed: Slow';
+	  });
+	  return board.modes.speed === 80 ? board.modes.speed = 30 : board.modes.speed = 80;
 	});
 
 	$("#toggle-walls").on('click', function () {
@@ -103,62 +144,56 @@
 	  $(this).toggleClass('red').text(function (i, val) {
 	    return val === 'Walls: On' ? 'Walls: Off' : 'Walls: On';
 	  });
+	  $(canvas).toggleClass('solid-walls');
 	});
 
-	function animate(timestamp) {
-	  var progress = 0;
-	  if (startTime < 0) {
-	    startTime = timestamp;
+	function saveScore() {
+	  var highscore = localStorage.getItem("highscore");
+	  var midscore = localStorage.getItem("midscore");
+	  var lowscore = localStorage.getItem("lowscore");
+	  var gameScore = board.score;
+	  if (highscore !== null) {
+	    if (gameScore > highscore) {
+	      localStorage.setItem("highscore", gameScore);
+	    } else if (gameScore > midscore) {
+	      localStorage.setItem("midscore", gameScore);
+	    } else if (gameScore > lowscore) {
+	      localStorage.setItem("lowscore", gameScore);
+	    }
 	  } else {
-	    progress = timestamp - startTime;
+	    localStorage.setItem("highscore", gameScore);
 	  }
-
-	  // Do animation ...
-	  requestAnimationFrame(function gameLoop() {
-	    ctx.clearRect(0, 0, canvas.width, canvas.height);
-	    food.draw;
-	    snake.draw;
-	    snake.move;
-	    if (board.modes.portal === true) {
-	      portal_entry.draw("blue");
-	      portal_exit.draw("orange");
-	      snake.entersPortal(portalSet);
-	    }
-	    if (snake.wallDetection === true || snake.collidesWithSelf === true) {
-	      console.log("YOU CANT EAT YOURSELF");
-	    } else {
-	      snakeCollidesWithFood();
-	      requestAnimationFrame(setTimeout(gameLoop, speed));
-	    }
-	  });
-	};
-
-	function keyDownListener() {
-	  $(document).keydown(function (e) {
-	    if (e.keyCode === 37 && snake.direction !== "right") {
-	      snake.direction = "left";
-	    } else if (e.keyCode === 38 && snake.direction !== "down") {
-	      snake.direction = "up";
-	    } else if (e.keyCode === 39 && snake.direction !== "left") {
-	      snake.direction = "right";
-	    } else if (e.keyCode === 40 && snake.direction !== "up") {
-	      snake.direction = "down";
-	    }
-	  });
 	}
 
-	function vimKeyListener() {
-	  $(document).keydown(function (e) {
-	    if (e.keyCode === 72 && snake.direction !== "right") {
-	      snake.direction = "left";
-	    } else if (e.keyCode === 75 && snake.direction !== "down") {
-	      snake.direction = "up";
-	    } else if (e.keyCode === 76 && snake.direction !== "left") {
-	      snake.direction = "right";
-	    } else if (e.keyCode === 74 && snake.direction !== "up") {
-	      snake.direction = "down";
-	    }
-	  });
+	function keyDownListener() {
+	  if (board.modes.vim === false) {
+	    $(document).off();
+	    $(document).keydown(function (e) {
+	      if (e.keyCode === 37 && snake.direction !== "right") {
+	        snake.direction = "left";
+	      } else if (e.keyCode === 38 && snake.direction !== "down") {
+	        snake.direction = "up";
+	      } else if (e.keyCode === 39 && snake.direction !== "left") {
+	        snake.direction = "right";
+	      } else if (e.keyCode === 40 && snake.direction !== "up") {
+	        snake.direction = "down";
+	      }
+	    });
+	  }
+	  if (board.modes.vim === true) {
+	    $(document).off();
+	    $(document).keydown(function (e) {
+	      if (e.keyCode === 72 && snake.direction !== "right") {
+	        snake.direction = "left";
+	      } else if (e.keyCode === 75 && snake.direction !== "down") {
+	        snake.direction = "up";
+	      } else if (e.keyCode === 76 && snake.direction !== "left") {
+	        snake.direction = "right";
+	      } else if (e.keyCode === 74 && snake.direction !== "up") {
+	        snake.direction = "down";
+	      }
+	    });
+	  }
 	}
 
 	function snakeCollidesWithFood() {
@@ -166,9 +201,21 @@
 	    // collision detected!
 	    food.eaten;
 	    food = new Food(options);
+	    board.checkLocation;
 	    snake.addNode;
 	    board.addPoints;
 	    board.increaseLevel;
+	    if (board.powerUpAble === true) {
+	      board.modes.powerup = true;
+	    }
+	  }
+	};
+
+	function snakeCollidesWithPowerUp() {
+	  if (powerup.x < snake.x + snake.width && powerup.x + powerup.width > snake.x && powerup.y < snake.y + snake.height && powerup.height + powerup.y > snake.y) {
+	    // collision detected!
+	    board.modes.powerup = false;
+	    board.enablePowerUp;
 	  }
 	};
 
@@ -10023,6 +10070,7 @@
 	var $ = __webpack_require__(1);
 	var Snake = __webpack_require__(3);
 	var Food = __webpack_require__(6);
+	var PowerUp = __webpack_require__(7);
 
 	var Board = (function () {
 	  function Board(options) {
@@ -10033,13 +10081,15 @@
 	    this.ctx = options.context;
 	    this.snake = new Snake(options);
 	    this.food = new Food(options);
+	    this.powerup = new PowerUp(options);
 	    this.level = 1;
 	    this.score = 0;
 	    this.modes = {
 	      vim: false,
 	      walls: true,
 	      portals: false,
-	      speed: "slow"
+	      speed: 80,
+	      powerup: false
 	    };
 	  }
 
@@ -10057,6 +10107,21 @@
 	        this.level += 1;
 	        $("#current-level").text(this.level);
 	      }
+	    }
+	  }, {
+	    key: 'powerUpAble',
+	    get: function get() {
+	      return this.level % 3 === 0;
+	    }
+	  }, {
+	    key: 'enablePowerUp',
+	    get: function get() {
+	      var modes = ["#vim", "#speed", "#toggle-walls", "#portal"];
+	      var power = _.sample(modes);
+	      $(power).click();
+	      setTimeout(function () {
+	        $(power).click();
+	      }, 5000);
 	    }
 	  }]);
 
@@ -22616,6 +22681,51 @@
 
 /***/ },
 /* 7 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var PowerUp = (function () {
+	  function PowerUp(options) {
+	    _classCallCheck(this, PowerUp);
+
+	    this.x = getRandomIntInclusive(6, options.canvas.width - 10);
+	    this.y = getRandomIntInclusive(6, options.canvas.height - 10);
+	    this.context = options.context;
+	    this.height = 10;
+	    this.width = 10;
+	  }
+
+	  _createClass(PowerUp, [{
+	    key: "draw",
+	    get: function get() {
+	      this.context.fillStyle = "yellow";
+	      this.context.fillRect(this.x, this.y, this.width, this.height);
+	      return this;
+	    }
+	  }, {
+	    key: "eaten",
+	    get: function get() {
+	      this.context.clearRect(this.x, this.y, this.width, this.height);
+	    }
+	  }]);
+
+	  return PowerUp;
+	})();
+
+	function getRandomIntInclusive(min, max) {
+	  var random = Math.floor(Math.random() * (max - min + 1)) + min;
+	  return Math.round(random / 10) * 10;
+	}
+
+	module.exports = PowerUp;
+
+/***/ },
+/* 8 */
 /***/ function(module, exports) {
 
 	'use strict';
