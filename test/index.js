@@ -11,5 +11,5 @@ const ctx = canvas.getContext('2d');
 function animate() {
     requestAnimationFrame(animate);
   }
-
+  
 animate();
