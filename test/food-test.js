@@ -52,6 +52,4 @@ describe('food', function() {
 
     assert.notEqual([1, 1], [food.x, food.y])
   })
-
-
 });
