@@ -11,6 +11,10 @@ button {
   border: 1px #00ff00 dotted;
 }
 
+.solid-walls {
+  border: 1px red solid !important;
+}
+
 body {
   background-color: black;
 }
