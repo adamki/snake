@@ -49,6 +49,7 @@ describe('food', function() {
     snake.nodes = [[1, 1] , [2, 1]]
     food.eaten;
     board.checkLocation(portalSet, food, snake)
+
     assert.notEqual([1, 1], [food.x, food.y])
   })
 
