@@ -2,7 +2,9 @@
 [![Stories in Ready](https://badge.waffle.io/adamki/snake-time.svg?label=ready&title=Ready)](http://waffle.io/adamki/snake-time)
 
 ###Snake-Time
-This is a Paired Project for module 4 students at the Turing School of Software and Design. 
+This is a Paired Project for module 4 students at the Turing School of Software and Design.
+
+![cover](/images/snake-cover.png)
 
 #####Project collaborators:
 [Matt Rooney](https://github.com/mattrooney) |
@@ -29,7 +31,10 @@ Start the Server:
 
 `npm start`
 
-Visit in Browser: 
+Visit in Browser:
 
 `http://localhost:8080`
 
+#####To play this game in production visit:
+
+`http://adamki.github.io/snake/`
