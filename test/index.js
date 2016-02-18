@@ -30,6 +30,5 @@ describe('snake collides with food', function() {
     food.y = 20;
     snake.direction = "down"
     snake.move
-    debugger
   })
 })
