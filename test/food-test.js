@@ -2,6 +2,7 @@ var assert = require('chai').assert
 var expect = require('chai').expect
 var Food = require('../lib/food');
 var Board = require('../lib/board');
+var Snake = require('../lib/snake');
 
 describe('food', function() {
   const canvas = document.createElement("canvas");
@@ -34,5 +35,4 @@ describe('food', function() {
 
     assert.notEqual(location, [food.x, food.y])
   })
-
 });

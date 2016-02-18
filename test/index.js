@@ -3,6 +3,8 @@ const $ = require('jquery');
 require('./snake-test')
 require('./board-test')
 require('./food-test')
+require('./powerup-test')
+
 
 const canvas = document.createElement("canvas");
 const ctx = canvas.getContext('2d');
@@ -30,6 +32,5 @@ describe('snake collides with food', function() {
     food.y = 20;
     snake.direction = "down"
     snake.move
-    debugger
   })
 })
