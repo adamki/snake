@@ -65,37 +65,4 @@ describe('snake', function() {
     snake.y = 50;
     assert.equal(snake.collidesWithSelf, true)
    })
-
-   it.skip('can detect walls', function() {
-     const snake = new Snake(options)
-     snake.direction = "left";
-     snake.move;
-
-     assert(snake.wallDetection);
-   })
-
-   it.skip('can enter and exit a portal', function() {
-     let portal_entry  = new Portal(options);
-     let portal_exit   = new Portal(options);
-     let portalSet     = {entry: portal_entry, exit: portal_exit}
-     const snake = new Snake(options)
-      snake.move;
-      snake.entersPortal(portalSet);
-   })
-});
-
-describe('draw()', function() {
-  it.skip('should draw itself on the canvas', function(){
-    var canvas = { fillRect: function(){} };
-    var spy = sinon.spy(canvas, "fillRect");
-
-    var options = {canvas: canvas, x: 0, y: 0, height: 20, width: 10}
-
-    var snake = new Snake(options);
-
-    snake.draw();
-
-    assert(spy.calledOnce, 'fillRect method was called on canvas context')
-    assert(spy.calledWith(0, 0, 10, 20), 'fillRect method was called with unexpected args')
-  });
 });
