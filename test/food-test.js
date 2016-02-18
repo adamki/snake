@@ -2,6 +2,7 @@ var assert = require('chai').assert
 var expect = require('chai').expect
 var Food = require('../lib/food');
 var Board = require('../lib/board');
+var Snake = require('../lib/snake');
 
 describe('food', function() {
   const canvas = document.createElement("canvas");
@@ -34,5 +35,23 @@ describe('food', function() {
 
     assert.notEqual(location, [food.x, food.y])
   })
+
+  it('does not land on snake or portals', function() {
+    const food = new Food(options)
+    const board = new Board(options);
+    const snake = new Snake(options);
+
+    var portalSet = {entry: [2, 1], exit: [3, 3]}
+
+    food.x = 1
+    food.y = 1
+
+    snake.nodes = [[1, 1] , [2, 1]]
+    food.eaten;
+    board.checkLocation(portalSet, food, snake)
+
+    assert.notEqual([1, 1], [food.x, food.y])
+  })
+
 
 });
