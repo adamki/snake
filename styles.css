@@ -47,14 +47,14 @@ h1#neon-tubing {
   font-size: 11rem; letter-spacing: 2rem;
 }
 
-h1#neon-tubing {
+h3#neon-tubing {
   margin: 0;
   font-weight: 100;
   text-align: center;
   font-family: 'Press Start 2P';
   color: #111;
-  padding: 4rem;
-  font-size: 6rem;
+  padding: 1rem;
+  font-size: 5rem;
   letter-spacing: 2rem;
   animation: neonspark 1s 3s forwards;
   text-shadow:
